@@ -29,6 +29,9 @@ app.use(JogosController)
 const EstudiosController = require('./controllers/EstudiosController')
 app.use(EstudiosController)
 
+const PlataformasController = require('./controllers/PlataformasController')
+app.use(PlataformasController)
+
 app.listen(3000, () => {
   console.log("Aplicação rodando -> http://localhost:3000")
 })
