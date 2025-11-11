@@ -32,6 +32,9 @@ app.use(EstudiosController)
 const PlataformasController = require('./controllers/PlataformasController')
 app.use(PlataformasController)
 
+const GenerosController = require('./controllers/GenerosController')
+app.use(GenerosController)
+
 app.listen(3000, () => {
   console.log("Aplicação rodando -> http://localhost:3000")
 })

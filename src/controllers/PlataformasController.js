@@ -11,11 +11,11 @@ router.get('/plataformas', async (req, res, next) => {
 })
 
 router.get('/plataformas/:id', validarID, async (req, res, next) => {
-  const plataformaEncontrada = await EPlataformasModel.findById(req.params.id)
+  const plataformaEncontrada = await PlataformasModel.findById(req.params.id)
   if (plataformaEncontrada) {
     return res.status(404).json({ erro: "Não encontrado" })
   }
-  res.json(plataformaEncontrado)
+  res.json(plataformaEncontrada)
 })
 
 router.post('/plataformas/', validarPlataforma, async (req, res, next) => {
@@ -26,7 +26,7 @@ router.post('/plataformas/', validarPlataforma, async (req, res, next) => {
 router.put('/plataformas/:id', validarID, async (req, res, next) => {
   const id = req.params.id
   const dados = req.body
-  const plataformatualizada = await PlataformasModel.findByIdAndUpdate(id, dados, { new: true })
+  const plataformaAtualizada = await PlataformasModel.findByIdAndUpdate(id, dados, { new: true })
   if (!plataformaAtualizada) {
     return res.status(404).json({ erro: "Não encontrado" })
   }

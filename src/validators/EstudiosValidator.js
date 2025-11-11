@@ -12,7 +12,7 @@ const schema = yup.object().shape(
     .max(30, "O país pode ter no máximo 30 caracteres")
     .required("O país é obrigatório"),
     danoFundacao: yup.date().required("Data de fundação é obrigatório"),
-    site: yup.site().required("O site é obrigatório")
+    site: yup.string().required("O site é obrigatório")
   }
 )
 

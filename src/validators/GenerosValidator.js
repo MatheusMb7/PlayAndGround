@@ -3,37 +3,18 @@ const mongoose = require('mongoose')
 
 const schema = yup.object().shape(
   {
-    titulo: yup.string()
-    .min(3, "o título precisa de pelo menos 3 caracteres")
-    .max(50, "O título precisa de no máximo 50 caracteres")
-    .required("Título é obrigatório"),
+    nome: yup.string()
+    .min(3, "o nome precisa de pelo menos 3 caracteres")
+    .max(50, "O nome precisa de no máximo 50 caracteres")
+    .required("nome é obrigatório"),
     descricao: yup.string()
-    .min(3, "A escrição precisa de pelo menos 3 caracteres")
-    .max(300, "A descrição pode ter no máximo 300 caracteres")
-    .required("Descrição é obrigatório"),
-    dataLancamento: yup.date().required("Data de Lançamento é obrigatório"),
-     genero: yup.string().required("cargo é obrigatório")
-      .test(
-        'id-validator',
-        'ID do genero é inválido',
-        value => mongoose.Types.ObjectId.isValid(value)
-      ),
-    estudio: yup.string().required("Estúdio é obrigatório")
-      .test(
-        'id-validator',
-        'ID do estudio é inválido',
-        value => mongoose.Types.ObjectId.isValid(value)
-      ),
-    plataforma: yup.string().required("Plataforma é obrigatório")
-      .test(
-        'id-validator',
-        'ID da plataforma é inválido',
-        value => mongoose.Types.ObjectId.isValid(value)
-      ),
+    .min(3, "A descroção precisa de pelo menos 3 caracteres")
+    .max(300, "A descroção pode ter no máximo 300 caracteres")
+    .required("A descroção é obrigatório")
   }
 )
 
-async function validarJogo(req, res, next) {
+async function validarGenero(req, res, next) {
   try {
     await schema.validate(req.body, { abortEarly: false })
     next()
@@ -42,4 +23,4 @@ async function validarJogo(req, res, next) {
   }
 }
 
-module.exports = { validarJogo }
+module.exports = { validarGenero }
