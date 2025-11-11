@@ -8,11 +8,11 @@ const schema = yup.object().shape(
     .max(50, "O título precisa de no máximo 50 caracteres")
     .required("Título é obrigatório"),
     descricao: yup.string()
-    .min(3, "A escrição precisa de pelo menos 3 caracteres")
-    .max(300, "A descrição pode ter no máximo 300 caracteres")
+    .min(3, "A descrição precisa de pelo menos 3 caracteres")
+    .max(500, "A descrição pode ter no máximo 500 caracteres")
     .required("Descrição é obrigatório"),
     dataLancamento: yup.date().required("Data de Lançamento é obrigatório"),
-     genero: yup.string().required("cargo é obrigatório")
+     genero: yup.string().required("O genero é obrigatório")
       .test(
         'id-validator',
         'ID do genero é inválido',
