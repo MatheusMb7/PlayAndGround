@@ -1,40 +1,40 @@
 const express = require('express')
 const router = express.Router()
 
-const JogosModel = require('../models/JogosModel')
-const { validarJogo } = require('../validators/JogosValidator')
+const GenerosModel = require('../models/GenerosModel')
+const { validarGenero } = require('../validators/GenerosValidator')
 const { validarID } = require('../validators/IDValidator')
 
-router.get('/jogos', async (req, res, next) => {
-  const jogos = await JogosModel.find().populate(['genero','estudio','plataforma'])
-  res.json(jogos)
+router.get('/generos', async (req, res, next) => {
+  const generos= await PlataformasModel.find()
+  res.json(generos)
 })
 
-router.get('/jogos/:id', validarID, async (req, res, next) => {
-  const jogoEncontrado = await JogosModel.findById(req.params.id).populate(['genero', 'estudio', 'plataforma'])
-  if (!jogoEncontrado) {
+router.get('/generos/:id', validarID, async (req, res, next) => {
+  const generoEncontrado = await GenerosModel.findById(req.params.id)
+  if (generoEncontrado) {
     return res.status(404).json({ erro: "Não encontrado" })
   }
-  res.json(jogoEncontrado)
+  res.json(generoEncontrado)
 })
 
-router.post('/jogos/', validarJogo, async (req, res, next) => {
-  const jogoCadastrado = await JogosModel.create(req.body)
-  res.status(201).json(jogoCadastrado)
+router.post('/generos/', validarGenero, async (req, res, next) => {
+  const generoCadastrado = await GenerosModel.create(req.body)
+  res.status(201).json(generoCadastrado)
 })
 
-router.put('/jogos/:id', validarID, async (req, res, next) => {
+router.put('/generos/:id', validarID, async (req, res, next) => {
   const id = req.params.id
   const dados = req.body
-  const jogoAtualizado = await JogosModel.findByIdAndUpdate(id, dados, { new: true })
-  if (!jogoAtualizado) {
+  const generoAtualizado = await GenerosModel.findByIdAndUpdate(id, dados, { new: true })
+  if (!generoAtualizado) {
     return res.status(404).json({ erro: "Não encontrado" })
   }
-  res.json(jogoAtualizado)
+  res.json(generoAtualizado)
 })
 
-router.delete('/jogos/:id', validarID, async (req, res, next) => {
-  await JogosModel.findByIdAndDelete(req.params.id)
+router.delete('/generos/:id', validarID, async (req, res, next) => {
+  await GenerosModel.findByIdAndDelete(req.params.id)
   res.status(204).send()
 })
 
