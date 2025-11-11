@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const schema = new mongoose.Schema(
   {
     titulo: { type: String, required: true },
-    dercricao: { type: String, required: true },
+    descricao: { type: String, required: true },
     dataLancamento: { type: Date, required: true },
     genero: {
       type: mongoose.Schema.Types.ObjectId,

@@ -6,7 +6,7 @@ const { validarGenero } = require('../validators/GenerosValidator')
 const { validarID } = require('../validators/IDValidator')
 
 router.get('/generos', async (req, res, next) => {
-  const generos= await PlataformasModel.find()
+  const generos= await GenerosModel.find()
   res.json(generos)
 })
 
