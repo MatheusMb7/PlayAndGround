@@ -23,8 +23,9 @@ mongoose.connect(url)
   })
 
 // rotas
-
+const JogosController = require('./controllers/JogosController')
+app.use(JogosController)
 
 app.listen(3000, () => {
-  console.log("Aplicação rodando -> http://locahost:3000")
+  console.log("Aplicação rodando -> http://localhost:3000")
 })
