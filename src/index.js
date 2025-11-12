@@ -35,9 +35,11 @@ app.use(PlataformasController)
 const GenerosController = require('./controllers/GenerosController')
 app.use(GenerosController)
 
+const AvaliacoesController = require('./controllers/AvaliacoesController')
+app.use(AvaliacoesController)
 
-const AvaliacaoesController = require('./controllers/AvaliacoesController') 
-app.use(AvaliacaoesController)
+const CampeonatosController = require('./controllers/CampeonatosController')
+app.use(CampeonatosController)
 
 const ComentariosController = require('./controllers/ComentariosController')
 app.use(ComentariosController)
@@ -45,8 +47,12 @@ app.use(ComentariosController)
 const ConquistasController = require('./controllers/ConquistasController')
 app.use(ConquistasController)
 
-const CampeonatosController = require('./controllers/CampeonatosController')
-app.use(CampeonatosController)
+const FavoritosController = require('./controllers/FavoritosController')
+app.use(FavoritosController)
+
+const UsuariosController = require('./controllers/UsuariosController')
+app.use(UsuariosController)
+
 
 
 app.listen(3000, () => {

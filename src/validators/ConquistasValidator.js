@@ -1,37 +1,45 @@
-const yup = require('yup');
-const mongoose = require('mongoose');
+const yup = require('yup')
+const mongoose = require('mongoose')
 
-const schema = yup.object().shape({
-  nome: yup
-    .string()
-    .min(3, 'O nome precisa de pelo menos 3 caracteres')
-    .max(50, 'O nome pode ter no máximo 50 caracteres')
-    .required('O nome é obrigatório'),
-
-  descricao: yup
-    .string()
-    .min(5, 'A descrição precisa de pelo menos 5 caracteres')
-    .max(200, 'A descrição pode ter no máximo 200 caracteres')
-    .required('A descrição é obrigatória'),
-
-  pontos: yup
-    .number()
-    .min(0, 'Os pontos devem ser no mínimo 0')
-    .required('Os pontos são obrigatórios'),
-
-  jogoId: yup
-    .string()
-    .test('is-valid-id', 'ID do jogo inválido', (value) => mongoose.Types.ObjectId.isValid(value))
-    .required('O ID do jogo é obrigatório')
-});
+const schema = yup.object().shape(
+  {
+    nome: yup.string()
+    .min(3, "o nome precisa de pelo menos 3 caracteres")
+    .max(50, "O nome precisa de no máximo 50 caracteres")
+    .required("Título é obrigatório"),
+    descricao: yup.string()
+    .min(3, "A descrição precisa de pelo menos 3 caracteres")
+    .max(500, "A descrição pode ter no máximo 500 caracteres")
+    .required("Descrição é obrigatório"),
+    pontos: yup.string().required("pontos é obrigatório"),
+    jogo: yup.string().required("O genero é obrigatório")
+      .test(
+        'id-validator',
+        'ID do genero é inválido',
+        value => mongoose.Types.ObjectId.isValid(value)
+      ),
+    usuario: yup.string().required("Estúdio é obrigatório")
+      .test(
+        'id-validator',
+        'ID do estudio é inválido',
+        value => mongoose.Types.ObjectId.isValid(value)
+      ),
+    plataforma: yup.string().required("Plataforma é obrigatório")
+      .test(
+        'id-validator',
+        'ID da plataforma é inválido',
+        value => mongoose.Types.ObjectId.isValid(value)
+      ),
+  }
+)
 
 async function validarConquista(req, res, next) {
   try {
-    await schema.validate(req.body, { abortEarly: false });
-    next();
+    await schema.validate(req.body, { abortEarly: false })
+    next()
   } catch (error) {
-    return res.status(400).json({ erros: error.errors });
+    return res.status(400).json({ erros: error.errors })
   }
 }
 
-module.exports = { validarConquista };
+module.exports = { validarConquista }

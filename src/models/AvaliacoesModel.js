@@ -1,30 +1,34 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const AvaliacaoSchema = new mongoose.Schema({
-  nota: {
-    type: Number,
-    required: true,
-    min: 0,
-    max: 10,
-    validate: { validator: Number.isInteger, msg: 'Nota deve ser um número inteiro' }
-  },
-  data: {
-    type: Date,
-    default: Date.now
-  },
-  jogo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Jogo',
-    required: true
-  },
-  usuario: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Usuario',
-    required: true
+const schema = new mongoose.Schema(
+  {
+    jogo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Jogos',
+      required: true
+    },
+    usuario: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Usuarios',
+      required: true
+    },
+    nota: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5
+    },
+    comentario: {
+      type: String,
+      maxlength: 500
+    },
+    dataAvaliacao: {
+      type: Date,
+      default: Date.now
+    }
   }
-}, { timestamps: true });
+)
 
+const AvaliacoesModel = mongoose.model('Avaliacoes', schema)
 
-AvaliacaoSchema.index({ jogo: 1, usuario: 1 }, { unique: true });
-
-module.exports = mongoose.model('Avaliacao', AvaliacaoSchema);
+module.exports = AvaliacoesModel

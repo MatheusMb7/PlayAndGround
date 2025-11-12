@@ -1,34 +1,28 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const ConquistaSchema = new mongoose.Schema({
-  nome: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  descricao: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  pontos: {
-    type: Number,
-    required: true,
-    min: 0
-  },
-  jogo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Jogo',
-    required: true
-  },
-  usuario: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Usuario',
-    required: true
+const schema = new mongoose.Schema(
+  {
+    nome: { type: String, required: true },
+    descricao: { type: String, required: true },
+    pontos: { type: Number, required: true },
+    jogo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Jogos',
+      required: true
+    },
+    usuario: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Usuarios',
+      required: true
+    },
+    plataforma: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Plataformas',
+      required: true
+    },
   }
-}, { timestamps: true });
+)
 
+const ConquistasModel = mongoose.model('Conquistas', schema)
 
-ConquistaSchema.index({ jogo: 1, usuario: 1, nome: 1 }, { unique: true });
-
-module.exports = mongoose.model('Conquista', ConquistaSchema);
+module.exports = ConquistasModel

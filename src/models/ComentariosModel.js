@@ -1,28 +1,27 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const ComentarioSchema = new mongoose.Schema({
-  texto: {
-    type: String,
-    required: true,
-    trim: true,
-    maxlength: 1000
-  },
-  data: {
-    type: Date,
-    default: Date.now
-  },
-  jogo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Jogo',
-    required: true
-  },
-  usuario: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Usuario',
-    required: true
+const schema = new mongoose.Schema(
+  {
+    texto: { type: String, required: true },
+    data: { type: Date, required: true },
+    jogo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Jogos',
+      required: true
+    },
+    usuario: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Usuarios',
+      required: true
+    },
+    plataforma: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Plataformas',
+      required: true
+    },
   }
-}, { timestamps: true });
+)
 
-ComentarioSchema.index({ jogo: 1, createdAt: -1 });
+const ComentariosModel = mongoose.model('Comentarios', schema)
 
-module.exports = mongoose.model('Comentario', ComentarioSchema);
+module.exports = ComentariosModel
