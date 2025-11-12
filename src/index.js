@@ -35,6 +35,14 @@ app.use(PlataformasController)
 const GenerosController = require('./controllers/GenerosController')
 app.use(GenerosController)
 
+
+const AvaliacaoesController = require('./controllers/AvaliacoesController') 
+app.use(AvaliacaoesController)
+
+const ComentariosController = require('./controllers/ComentariosController')
+app.use(ComentariosController)
+
+
 app.listen(3000, () => {
   console.log("Aplicação rodando -> http://localhost:3000")
 })
