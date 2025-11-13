@@ -42,6 +42,12 @@ app.use(AvaliacaoesController)
 const ComentariosController = require('./controllers/ComentariosController')
 app.use(ComentariosController)
 
+const ConquistasController = require('./controllers/ConquistasController')
+app.use(ConquistasController)
+
+const CampeonatosController = require('./controllers/CampeonatosController')
+app.use(CampeonatosController)
+
 
 app.listen(3000, () => {
   console.log("Aplicação rodando -> http://localhost:3000")
